@@ -165,6 +165,6 @@ Python:
 
 Rust:
 
-`cargo run ./main.rs`
+`./SLR`
 
 
