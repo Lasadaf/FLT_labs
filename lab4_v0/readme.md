@@ -168,7 +168,7 @@ Python:
 
 `python3 ./SLR.py`
 
-Rust:
+Rust (исходный код в main.rs):
 
 `./SLR`
 
