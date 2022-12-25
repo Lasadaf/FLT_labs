@@ -157,6 +157,14 @@ digraph {
 не был разрешён при k = 3
 ```
 
+## Запуск программы:
 
+Python:
+
+`python3 ./SLR.py`
+
+Rust:
+
+`cargo run ./main.rs`
 
 
