@@ -23,7 +23,7 @@
 - В первом случае: FOLLOW<sub>k</sub>(A) не имеет пересечений с FOLLOW<sub>k</sub>(B);
 - Во втором случае: FOLLOW<sub>k</sub>(A) не имеет пересечений с FIRST<sub>k</sub>(FIRST<sub>k</sub>(*Текущего состояния B*) ++ FOLLOW<sub>k</sub>(B)).
 
-Конфлит считается подвешенным при lookahead = k, если:
+Конфликт считается подвешенным при lookahead = k, если:
 
 - В первом случае: FOLLOW<sub>k</sub>(A) полностью совпадает с FOLLOW<sub>k</sub>(B);
 - Во втором случае: FOLLOW<sub>k</sub>(A) полностью совпадает с FIRST<sub>k</sub>(FIRST<sub>k</sub>(*Текущего состояния B*) ++ FOLLOW<sub>k</sub>(B)).
