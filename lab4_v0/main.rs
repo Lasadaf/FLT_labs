@@ -83,12 +83,12 @@ fn parse_rules(rules: Vec<String>) -> Vec<Rule> {
             ii += 1;
         }
         if ii == rules[i].len() {
-            println!("Синтаксическая ошибка: начальный нетерминал не найден");
+            println!("Синтаксическая ошибка: начальный нетерминал не закрыт");
             process::exit(0x0100);
         }
         ii += 1;
         if rules[i].chars().nth(ii).unwrap() != '-' || rules[i].chars().nth(ii + 1).unwrap() != '>' {
-            println!("Синтаксическая ошибка: начальный нетерминал не найден");
+            println!("Синтаксическая ошибка: не найден разделитель в правиле");
             process::exit(0x0100);
         }
         ii += 2;
@@ -99,7 +99,7 @@ fn parse_rules(rules: Vec<String>) -> Vec<Rule> {
                 bodies.push(new_body.clone().to_string());
                 new_body = "".to_string();
                 if ii == rules[i].len() - 1 {
-                    println!("Синтаксическая ошибка: начальный нетерминал не найден");
+                    println!("Синтаксическая ошибка: после знака | нет выражения");
                     process::exit(0x0100);
                 }
                 ii += 1;
@@ -111,7 +111,7 @@ fn parse_rules(rules: Vec<String>) -> Vec<Rule> {
                     ii += 1;
                 }
                 if ii == rules[i].len() {
-                    println!("Синтаксическая ошибка: начальный нетерминал не найден");
+                    println!("Синтаксическая ошибка: нетерминал не закрыт");
                     process::exit(0x0100);
                 }
                 new_body = new_body + &"]".to_string();
@@ -119,7 +119,7 @@ fn parse_rules(rules: Vec<String>) -> Vec<Rule> {
                 continue;
             }
             if !(rules[i].chars().nth(ii).unwrap().is_alphabetic()) && !(rules[i].chars().nth(ii).unwrap().is_digit(10)) {
-                println!("Синтаксическая ошибка: начальный нетерминал не найден");
+                println!("Синтаксическая ошибка: неопознанный символ");
                 process::exit(0x0100);
             }
             new_body.push(rules[i].chars().nth(ii).unwrap());
@@ -850,9 +850,6 @@ fn main() {
         rules[i] = del_whitespaces(rules[i].clone());
     }
     let parsed = parse_rules(rules);
-    for i in 0..parsed.len() {
-        println!("{}", rule_to_string(parsed[i].clone()));
-    }
     let mut shifts = Vec::<Shift>::new();
     let mut states = Vec::<State>::new();
     (states, shifts, _) = build_LR(parsed.clone(), vec![Rule {
